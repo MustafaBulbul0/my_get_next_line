@@ -42,23 +42,25 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-static char *update_buffer(int fd, char *buffer)
+static char	*update_buffer(int fd, char *buffer)
 {
-	char temp[BUFFER_SIZE + 1];
-	int bytes_read;
-	char *newline_ptr;
+	char	temp[2];
+	int		bytes_read;
+	char	*newline_ptr;
 
-	while ((bytes_read = read(fd, temp, BUFFER_SIZE)) > 0)
+	while ((bytes_read = read(fd, temp, 1)) > 0)
 	{
 		temp[bytes_read] = '\0';
-		char *new_buffer = ft_strjoin(buffer, temp);
+		char	*new_buffer;
+	
+		new_buffer = ft_strjoin(buffer, temp);
 		if (buffer)
 			free(buffer);
 		buffer = new_buffer;
-		if ((newline_ptr = ft_strchr(buffer, '\n')))
-			return buffer;
+		if (newline_ptr = ft_strchr(buffer, '\n'))
+			return (buffer);
 	}
-	return buffer;
+	return (buffer);
 }
 
 char *get_next_line(int fd)
@@ -68,13 +70,12 @@ char *get_next_line(int fd)
 	char *newline_ptr;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return NULL;
+		return (NULL);
 	buffer = update_buffer(fd, buffer);
 	if (!buffer)
-		return NULL;
+		return (NULL);
 	if ((newline_ptr = ft_strchr(buffer, '\n')))
 	{
-		*newline_ptr = '\0';
 		line = ft_strdup(buffer);
 		ft_memmove(buffer, newline_ptr + 1, ft_strlen(newline_ptr + 1) + 1);
 	}
@@ -85,4 +86,20 @@ char *get_next_line(int fd)
 		buffer = NULL;
 	}
 	return line;
+}
+#include <fcntl.h>
+#include <stdio.h>
+
+
+int main()
+{
+	int fd = open("test.txt", O_RDONLY, O_CREAT);
+	char	*c;
+	c = get_next_line(fd);
+	printf("%s",  c);
+	c = get_next_line(fd);
+	printf("%s",  c);
+	c = get_next_line(fd);
+	printf("%s",  c);
+
 }
