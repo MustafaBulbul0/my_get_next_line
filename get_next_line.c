@@ -87,19 +87,3 @@ char *get_next_line(int fd)
 	}
 	return line;
 }
-#include <fcntl.h>
-#include <stdio.h>
-
-
-int main()
-{
-	int fd = open("test.txt", O_RDONLY, O_CREAT);
-	char	*c;
-	c = get_next_line(fd);
-	printf("%s",  c);
-	c = get_next_line(fd);
-	printf("%s",  c);
-	c = get_next_line(fd);
-	printf("%s",  c);
-
-}
