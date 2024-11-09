@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/09 10:45:27 by mubulbul          #+#    #+#             */
+/*   Updated: 2024/11/09 12:28:20 by mubulbul         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_strchr(const char *str, int ch)
@@ -47,34 +59,37 @@ static char	*update_buffer(int fd, char *buffer)
 	char	temp[2];
 	int		bytes_read;
 	char	*newline_ptr;
+	char	*new_buffer;
 
-	while ((bytes_read = read(fd, temp, 1)) > 0)
+	bytes_read = read(fd, temp, 1);
+	while (bytes_read > 0)
 	{
 		temp[bytes_read] = '\0';
-		char	*new_buffer;
-	
 		new_buffer = ft_strjoin(buffer, temp);
 		if (buffer)
 			free(buffer);
 		buffer = new_buffer;
-		if (newline_ptr = ft_strchr(buffer, '\n'))
+		newline_ptr = ft_strchr(buffer, '\n');
+		if (newline_ptr != NULL)
 			return (buffer);
+		bytes_read = read(fd, temp, 1);
 	}
 	return (buffer);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char *buffer = NULL;
-	char *line;
-	char *newline_ptr;
+	static char	*buffer = NULL;
+	char		*line;
+	char		*newline_ptr;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = update_buffer(fd, buffer);
 	if (!buffer)
 		return (NULL);
-	if ((newline_ptr = ft_strchr(buffer, '\n')))
+	newline_ptr = ft_strchr(buffer, '\n');
+	if (newline_ptr != NULL)
 	{
 		line = ft_strdup(buffer);
 		ft_memmove(buffer, newline_ptr + 1, ft_strlen(newline_ptr + 1) + 1);
@@ -85,5 +100,5 @@ char *get_next_line(int fd)
 		free(buffer);
 		buffer = NULL;
 	}
-	return line;
+	return (line);
 }
