@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:27 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/11/09 12:28:20 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/11/24 11:10:24 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 static char	*update_buffer(int fd, char *buffer)
 {
-	char	temp[2];
+	char	temp[BUFFER_SIZE + 1];
 	int		bytes_read;
 	char	*newline_ptr;
 	char	*new_buffer;
 
 	bytes_read = read(fd, temp, 1);
+	if (bytes_read < 0)
+		return (NULL);
 	while (bytes_read > 0)
 	{
 		temp[bytes_read] = '\0';
