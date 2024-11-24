@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:55 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/11/09 10:46:00 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:39:17 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 size_t	ft_strlen(const char *len)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
+	if (len == NULL)
+		return (0);
 	while (len[i])
 		i++;
 	return (i);
@@ -30,7 +32,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	n_dest = (unsigned char *)dest;
 	n_src = (const unsigned char *)src;
-	if (n_dest == n_src || n == 0)
+	if (n == 0)
 		return (dest);
 	if (n_dest > n_src)
 	{
@@ -70,17 +72,19 @@ char	*ft_strdup(const char *str)
 size_t	ft_strlcpy(char *dest, const char *src, size_t sizeDest)
 {
 	size_t	i;
+	size_t	src_len;
 
+	src_len = ft_strlen(src);
 	i = 0;
 	if (sizeDest == 0)
-		return (ft_strlen(src));
+		return (src_len);
 	while (src[i] && (i < sizeDest - 1))
 	{
 		dest[i] = src[i];
 		i++;
 	}
 	dest[i] = '\0';
-	return (ft_strlen(src));
+	return (src_len);
 }
 
 size_t	ft_strlcat(char *dest, const char *src, size_t sizeDest)
