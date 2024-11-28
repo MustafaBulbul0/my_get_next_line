@@ -27,6 +27,7 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(const char *len);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*ft_strdup(const char *str);
+char	*ft_strndup(const char *str, size_t n);
 char	*ft_strchr(const char *str, int ch);
 size_t	ft_strlcpy(char *dest, const char *src, size_t sizeDest);
 size_t	ft_strlcat(char *dest, const char *src, size_t sizeDest);
