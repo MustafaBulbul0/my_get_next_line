@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:55 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/12/01 10:01:31 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 10:57:03 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	ft_strlen(const char *len)
 	size_t	i;
 
 	i = 0;
-	if (len == NULL)
+	if (!len)
 		return (0);
-	while (len[i])
+	while (len[i] != '\0')
 		i++;
 	return (i);
 }

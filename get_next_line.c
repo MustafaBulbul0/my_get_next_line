@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:00:14 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/12/01 10:02:15 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 11:12:55 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len_s2;
 	char	*ptr;
 
-	if (s1)
-		len_s1 = ft_strlen(s1);
-	else
+	if (!s1)
 		len_s1 = 0;
-	if (s2)
-		len_s2 = ft_strlen(s2);
 	else
+		len_s1 = ft_strlen(s1);
+	if (!s2)
 		len_s2 = 0;
+	else
+		len_s2 = ft_strlen(s2);
 	ptr = (char *)malloc(len_s1 + len_s2 + 1);
 	if (!ptr)
 		return (NULL);
@@ -88,6 +88,8 @@ static char	*read_and_store(int fd, char *last_address)
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
+	if (!last_address)
+		last_address = ft_strdup("");
 	while (!ft_strchr(last_address, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
