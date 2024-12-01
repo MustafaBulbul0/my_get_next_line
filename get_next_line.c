@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 10:00:14 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/12/01 11:12:55 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:29:12 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,30 @@ char	*ft_strchr(const char *str, int ch)
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	len_s1;
-	size_t	len_s2;
-	char	*ptr;
+	size_t	total_size;
+	char	*arr;
+	size_t	i;
+	size_t	arr_index;
 
-	if (!s1)
-		len_s1 = 0;
-	else
-		len_s1 = ft_strlen(s1);
-	if (!s2)
-		len_s2 = 0;
-	else
-		len_s2 = ft_strlen(s2);
-	ptr = (char *)malloc(len_s1 + len_s2 + 1);
-	if (!ptr)
+	i = 0;
+	arr_index = 0;
+	total_size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	arr = malloc(total_size);
+	if (arr == NULL)
 		return (NULL);
-	if (s1)
-		ft_strlcpy(ptr, s1, len_s1 + 1);
-	if (s2)
-		ft_strlcat(ptr, s2, len_s1 + len_s2 + 1);
-	return (ptr);
+	while (s1[i] != '\0')
+	{
+		arr[arr_index++] = s1[i];
+		i++;
+	}
+	i = 0;
+	while (s2[i] != '\0')
+	{
+		arr[arr_index++] = s2[i];
+		i++;
+	}
+	arr[arr_index] = '\0';
+	return (arr);
 }
 
 static char	*extract_line(char **last_address)
@@ -88,16 +92,11 @@ static char	*read_and_store(int fd, char *last_address)
 	if (!buffer)
 		return (NULL);
 	bytes_read = 1;
-	if (!last_address)
-		last_address = ft_strdup("");
 	while (!ft_strchr(last_address, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(buffer);
-			return (NULL);
-		}
+			return (ft_free(buffer, last_address));
 		buffer[bytes_read] = '\0';
 		temp = ft_strjoin(last_address, buffer);
 		free(last_address);
@@ -112,7 +111,7 @@ char	*get_next_line(int fd)
 	static char	*last_address = NULL;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || ft_set_d(&last_address))
 		return (NULL);
 	last_address = read_and_store(fd, last_address);
 	if (!last_address)

@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:50 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/12/01 10:11:24 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:26:23 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ size_t	ft_strlen(const char *len);
 char	*ft_strdup(const char *str);
 char	*ft_strndup(const char *str, size_t n);
 char	*ft_strchr(const char *str, int ch);
-size_t	ft_strlcpy(char *dest, const char *src, size_t sizeDest);
-size_t	ft_strlcat(char *dest, const char *src, size_t sizeDest);
 char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_set_d(char **data);
+char	*ft_free(char *buf, char *adress);
 
 #endif

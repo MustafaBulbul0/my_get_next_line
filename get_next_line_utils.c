@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:55 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/12/01 10:57:03 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:30:47 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strdup(const char *str)
 	int		i;
 
 	i = 0;
+	if (!str)
+		return (NULL);
 	ptr = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!ptr)
 		return (NULL);
@@ -60,42 +62,24 @@ char	*ft_strndup(const char *str, size_t n)
 	return (ptr);
 }
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t sizeDest)
+int	ft_set_d(char **data)
 {
-	size_t	i;
-	size_t	src_len;
-
-	src_len = ft_strlen(src);
-	i = 0;
-	if (sizeDest == 0)
-		return (src_len);
-	while (src[i] && (i < sizeDest - 1))
+	if (!data)
+		return (1);
+	if (*data == NULL)
 	{
-		dest[i] = src[i];
-		i++;
+		*data = (char *) malloc(sizeof(char));
+		if (*data)
+			**data = '\0';
+		else
+			return (1);
 	}
-	dest[i] = '\0';
-	return (src_len);
+	return (0);
 }
 
-size_t	ft_strlcat(char *dest, const char *src, size_t sizeDest)
+char	*ft_free(char *buf, char *adress)
 {
-	size_t	i;
-	size_t	s_dest;
-	size_t	s_src;
-
-	i = 0;
-	s_dest = ft_strlen(dest);
-	s_src = ft_strlen(src);
-	if (sizeDest <= s_dest)
-		return (sizeDest + s_src);
-	if (sizeDest == 0)
-		return (s_dest);
-	while (src[i] && (s_dest + i) < (sizeDest - 1))
-	{
-		dest[s_dest + i] = src[i];
-		i++;
-	}
-	dest[s_dest + i] = '\0';
-	return (s_dest + s_src);
+	free(buf);
+	free(adress);
+	return (NULL);
 }
