@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:55 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/11/24 14:39:17 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 10:01:31 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,33 +24,6 @@ size_t	ft_strlen(const char *len)
 	return (i);
 }
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	unsigned char		*n_dest;
-	const unsigned char	*n_src;
-	size_t				i;
-
-	n_dest = (unsigned char *)dest;
-	n_src = (const unsigned char *)src;
-	if (n == 0)
-		return (dest);
-	if (n_dest > n_src)
-	{
-		while (n--)
-			n_dest[n] = n_src[n];
-	}
-	else
-	{
-		i = 0;
-		while (i < n)
-		{
-			n_dest[i] = n_src[i];
-			i++;
-		}
-	}
-	return (dest);
-}
-
 char	*ft_strdup(const char *str)
 {
 	char	*ptr;
@@ -61,6 +34,24 @@ char	*ft_strdup(const char *str)
 	if (!ptr)
 		return (NULL);
 	while (str[i])
+	{
+		ptr[i] = str[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+
+char	*ft_strndup(const char *str, size_t n)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = (char *)malloc(n + 1);
+	if (!ptr)
+		return (NULL);
+	while (i < n && str[i])
 	{
 		ptr[i] = str[i];
 		i++;
