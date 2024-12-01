@@ -6,7 +6,7 @@
 /*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:45:50 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/11/09 12:29:21 by mubulbul         ###   ########.fr       */
+/*   Updated: 2024/12/01 10:11:24 by mubulbul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *len);
-void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*ft_strdup(const char *str);
 char	*ft_strndup(const char *str, size_t n);
 char	*ft_strchr(const char *str, int ch);
