@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mubulbul <mubulbul@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 10:45:50 by mubulbul          #+#    #+#             */
-/*   Updated: 2024/12/01 16:26:23 by mubulbul         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
@@ -18,9 +6,6 @@
 # endif
 
 # include <stdlib.h>
-# include <stddef.h>
-# include <fcntl.h>
-# include <stdio.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);
