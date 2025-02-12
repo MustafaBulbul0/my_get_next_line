@@ -65,6 +65,11 @@ static char	*extract_line(char **last_address)
 		len++;
 	line = ft_strndup(*last_address, len);
 	temp = ft_strdup(*last_address + len);
+	if (temp && temp == '\0')
+	{
+		free(temp);
+		temp = NULL;
+	}
 	free(*last_address);
 	*last_address = temp;
 	return (line);
